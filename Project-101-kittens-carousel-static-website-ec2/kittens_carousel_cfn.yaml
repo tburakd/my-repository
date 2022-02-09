@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: |
-    This CloudFormation Template was written for running Kittens Carousel Static Website on EC2. Kittens Carousel Static Website will be deployed on Amazon Linux 2 (ami-0a8b4cd432b1c3063) EC2 Instance with custom security group which allows http connections on port 80 and ssh port 22 from anywhere. Kittens Carousel Static Website is downloaded from my Public Github repository, then deployed on Apache Web Server.
+    This CloudFormation Template was written for running Kittens Carousel Static Website on EC2. Kittens Carousel Static Website will be deployed on Amazon Linux 2 (ami-033b95fb8079dc481) EC2 Instance with custom security group which allows http connections on port 80 and ssh port 22 from anywhere. Kittens Carousel Static Website is downloaded from my Public Github repository, then deployed on Apache Web Server.
 
 Resources:
   WebServerSecurityGroup:
@@ -19,8 +19,8 @@ Resources:
   WebServerHost:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0a8b4cd432b1c3063
-      KeyName: serdar
+      ImageId: ami-033b95fb8079dc481
+      KeyName: burak
       InstanceType: t2.micro
       SecurityGroupIds:
         - !Ref WebServerSecurityGroup
@@ -33,7 +33,7 @@ Resources:
             yum update -y
             yum install httpd -y
             cd /var/www/html
-            FOLDER="https://raw.githubusercontent.com/serdarcw/my-repository/master/Project-101-kittens-carousel-static-website-ec2/static-web"
+            FOLDER="https://raw.githubusercontent.com/tburakd/my-repository/master/Project-101-kittens-carousel-static-website-ec2/static-web"
             wget ${FOLDER}/index.html
             wget ${FOLDER}/cat0.jpg
             wget ${FOLDER}/cat1.jpg
@@ -48,3 +48,4 @@ Outputs:
       - http://${PublicAddress}
       - PublicAddress: !GetAtt WebServerHost.PublicDnsName
     Description: Kittens Carousel Application URL
+
