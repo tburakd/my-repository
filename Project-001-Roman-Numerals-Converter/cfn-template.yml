@@ -5,7 +5,7 @@ Parameters:
   KeyName:
     Description: Enter the name of your Key Pair for SSH connections. We should work hard like Rihanna says "work, work wok"
     Type: AWS::EC2::KeyPair::KeyName
-    Default: serdar
+    Default: burak
     ConstraintDescription : Must be the name of an existing EC2 KeyPair.
 Resources:
   WebServerSecurityGroup:
@@ -24,7 +24,7 @@ Resources:
   WebServerHost:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-01cc34ab2709337aa
+      ImageId: ami-0c02fb55956c7d316
       InstanceType: t2.micro
       KeyName: !Ref KeyName
       SecurityGroupIds:
@@ -33,18 +33,18 @@ Resources:
         - Key: Name
           Value: !Sub Web Server of ${AWS::StackName} Stack 
       UserData: !Base64 |
-#! /bin/bash
-yum update -y
-yum install python3 -y
-pip3 install flask
-cd /home/ec2-user
-FOLDER="https://raw.githubusercontent.com/serdamy-repository/master/Project-001-Roman-Numerals-Converter"
-wget "${FOLDER}"/app.py
-mkdir templates && cd templates
-wget "${FOLDER}"/templates/index.html
-wget "${FOLDER}"/templates/result.html
-cd ..
-python3 app.py
+            #! /bin/bash
+            yum update -y
+            sudo yum install -y python3 
+            pip3 install flask
+            cd /home/ec2-user
+            FOLDER="https://raw.githubusercontent.com/tburakd/my-repository/master/Project-001-Roman-Numerals-Converter"
+            wget "${FOLDER}"/app.py
+            mkdir templates && cd templates
+            wget "${FOLDER}"/templates/index.html
+            wget "${FOLDER}"/templates/result.html
+            cd ..
+            python3 app.py
 
 Outputs: 
   WebsiteURL:
